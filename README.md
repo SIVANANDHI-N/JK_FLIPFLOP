@@ -27,6 +27,29 @@ STEP:9 In the Design Object List Window, enter the pin location for each pin in 
 STEP:10 Double click on the Implement Design and double click on the Generate Programming File to create a bitstream of the design.(.v) file is converted into .bit file here. 
 STEP:11 Load the Bit file into the SPARTAN 6 FPGA STEP:11 On the board, by giving required input, the LEDs starts to glow light, indicating the output
 
+# Program
+```
+     module jk_ff (q, q_bar, j,k, clk, reset);        
+     input j,k,clk, reset;
+     output reg q;
+     output q_bar;
+     always@(posedge clk) begin
+     if(!reset)
+            q <= 0;
+     else 
+     begin
+        case({j,k})              
+             2'b00: q <= q; // No change
+             2'b01: q <= 1'b0; // reset
+             2'b10: q <= 1'b1; // set
+             2'b11: q <= ~q; // Toggle                       
+          endcase
+        end
+     end
+         assign q_bar = ~q;
+     endmodule
+```
+
 ![image](https://github.com/RESMIRNAIR/JK_FLIPFLOP/assets/154305926/094e9d55-5f30-4984-90b9-dd51d5297974)
 # Circuit Diagram
 ![image](https://github.com/RESMIRNAIR/JK_FLIPFLOP/assets/154305926/5b973ee8-9ee2-402d-8cba-1adfa2e4d5f2)
